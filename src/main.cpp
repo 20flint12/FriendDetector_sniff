@@ -49,11 +49,10 @@ bool procPrintSniff(void *);
 
 #include "my_NTP.h"
 
-// #include <ArduinoJson.h>
 
 
 uint32_t chip_id = 1111111;
-bool init_pass = true;
+// bool init_pass = true;
 bool single_pass = false;
 uint32_t txValue;
 uint16_t CUR_INDEX = 0;
@@ -88,7 +87,6 @@ bool procMainSniff(void *) {        // .
 
 bool procPrintSniff(void *) {       // :  (strList)
 
-  digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
   Serial.println(":");
 
   // send2Ble(":"); 
@@ -97,15 +95,31 @@ bool procPrintSniff(void *) {       // :  (strList)
   // send2Ble(WiFi.macAddress()); 
   // send2Ble(String(chip_id)); 
   // send2Ble(String(KNOWN_ROUTER)); 
-  send2Ble(wanted[KNOWN_ROUTER].friendName); 
 
-  init_pass = true;
+  // DynamicJsonDocument doc1(20);
+
+  // String data = String(wanted[KNOWN_ROUTER].friendName) + String(deviceConnected); 
+  // doc1["n"] = "data";
+
+  // JsonObject obj1 = doc1.as<JsonObject>();
+  // BLE_message = "2352355asdads";
+  // serializeJson(obj1, BLE_message);
+  // send2Ble(BLE_message); 
+  
+  // char JSON[18];
+  // sprintf(JSON, "{\"n\":%s,\"c\": 1}", wanted[KNOWN_ROUTER].friendName, deviceConnected);
+  // sprintf(JSON, "{\"n\":%s,\"c\": %d}", wanted[KNOWN_ROUTER].friendName, deviceConnected);
+  // send2Ble(JSON); 
+
+
+  // init_pass = true;
 
   // check_activity(true, true);        // void check_activity(bool do_print) {            // (strDevs)
   // Serial.println(String(strDevs));
 
   // loop_BLE_multi();
-  if (deviceConnected or true) {
+  if (deviceConnected) {
+    digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
 
     for (itm = mymap.begin(); itm != mymap.end(); ++itm) {
   
