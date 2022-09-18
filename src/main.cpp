@@ -8,6 +8,15 @@
   https://github.com/platformio/platform-espressif32/blob/master/boards/esp32dev.json
 */
 
+
+
+//#define AZ_DeliveryDevKitC_V4_BOARD
+#define AI_Thinker_BOARD
+
+
+
+
+
 // #include <FS.h>
 #include <Arduino.h>
 #include <math.h>
@@ -28,6 +37,10 @@
 #include "my_WiFiConn.h"
 #include "my_Device.h"
 #include "my_Sniff_32.h"
+
+
+
+
 
 
 bool procMainSniff(void *);
@@ -75,7 +88,9 @@ bool procMainSniff(void *) {        // .
 
 bool procPrintSniff(void *) {       // :  (strList)
 
+  digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
   Serial.println(":");
+
   // send2Ble(":"); 
   // send2Ble(String(txValue)); 
   // send2Ble(String(__FILE__)); 
@@ -153,9 +168,9 @@ bool procPrintSniff(void *) {       // :  (strList)
   }
   
   reset_activity();
-
-
   recharge_taskPrintSniff();
+
+  digitalWrite(FLASH_GPIO_NUM, LOW);    // turn the LED off by ma
   return true; // repeat? true
 }
 
@@ -199,6 +214,22 @@ void setup() {
 
   taskMainSniff = timerMainSniff.in(1, procMainSniff);
   taskPrintSniff = timerPrintSniff.in(PERIOD_PrintSniff, procPrintSniff);  
+
+
+  // initialize digital pin LEDs as an output.
+  pinMode(FLASH_GPIO_NUM, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);                       
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by ma
+  delay(10000);                       
+
+  digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(100);                       
+  digitalWrite(FLASH_GPIO_NUM, LOW);    // turn the LED off by ma
+  delay(100);                       
+
 
 }
 

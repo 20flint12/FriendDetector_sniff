@@ -3,6 +3,31 @@
 #define _HW_INFO_H    // (Use a suitable name, usually based on the file name.)
 
 
+
+
+#if defined(AI_Thinker_BOARD)
+
+  #define FLASH_GPIO_NUM        4       // ESP32-CAM GPIO 4 (flashlight)
+  #define LED_BUILTIN           33
+
+#elif defined(AZ_DeliveryDevKitC_V4_BOARD)
+
+  #define FLASH_GPIO_NUM        4       // 
+  #define FLASH_GPIO_NUM        4       // 
+
+#else
+
+  #warning "Custom board configuration is used"
+
+  #define BOARD_BUTTON_PIN            0                     // Pin where user button is attached
+  #define BOARD_BUTTON_ACTIVE_LOW     true                  // true if button is "active-low"
+
+#endif
+
+
+
+
+
 #define PUBLISH_DEBUG
 
 
