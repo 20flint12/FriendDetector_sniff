@@ -96,15 +96,15 @@ bool procPrintSniff(void *) {       // :  (strList)
   // send2Ble(String(chip_id)); 
   // send2Ble(String(KNOWN_ROUTER)); 
 
-  // DynamicJsonDocument doc1(20);
+  DynamicJsonDocument doc1(20);
 
   // String data = String(wanted[KNOWN_ROUTER].friendName) + String(deviceConnected); 
-  // doc1["n"] = "data";
+  doc1["n"] = "data";
 
-  // JsonObject obj1 = doc1.as<JsonObject>();
-  // BLE_message = "2352355asdads";
-  // serializeJson(obj1, BLE_message);
-  // send2Ble(BLE_message); 
+  JsonObject obj1 = doc1.as<JsonObject>();
+  BLE_message = "2352355asdads";
+  serializeJson(obj1, BLE_message);
+  send2Ble(BLE_message); 
   
   // char JSON[18];
   // sprintf(JSON, "{\"n\":%s,\"c\": 1}", wanted[KNOWN_ROUTER].friendName, deviceConnected);
