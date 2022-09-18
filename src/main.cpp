@@ -10,8 +10,8 @@
 
 
 
-#define AZ_DeliveryDevKitC_V4_BOARD
-// #define AI_Thinker_BOARD
+// #define AZ_DeliveryDevKitC_V4_BOARD
+#define AI_Thinker_BOARD
 
 
 
