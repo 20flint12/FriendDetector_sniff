@@ -153,8 +153,8 @@ void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂ
       strDevs.println(BOARD_NAME);
       BOT_TOKEN = BOT_TOKEN_FriendDetectorBiblyka_bot;
       strDevs.printf_P(PSTR("BOT_TOKEN_FriendDetectorBiblyka_bot\n"));
-      KNOWN_ROUTER = KNOWN_ROUTER_TP_LINK_344A;
-      strDevs.printf_P(PSTR("KNOWN_ROUTER_TP_LINK_344A\n"));
+      KNOWN_ROUTER = KNOWN_ROUTER_Roza;
+      strDevs.printf_P(PSTR("KNOWN_ROUTER_Roza\n"));
       break;
 
     case 0xA9FBBEAC:  // #8 ESP32: second
@@ -272,7 +272,7 @@ const WantedDevice wanted[KNOWN_SIZE] = {
   { 0x4dcc593247ea, "HiddenSSID   ", 30, 10 },  // 15    router HiddenSSID
   { 0x4dcc593247d8, "borovsa      ", 30, 10 },  // 16    router borovsa
   { 0x4a34da4a9a90, "TP-LINK_344A ", 30,  7 },  // 17    router TP-LINK_344A Bokei
-  { 0x54e43b94e834, "Roza         ", 30,  2 },  // 18    router Roza
+  { 0x54e43b94e834, "Roza",          30,  2 },  // 18    router Roza
   //******************************************************
 
   { 0xb8103c94e834, "Roza 1       ", 30,  2 },  // 19    client Roza 1

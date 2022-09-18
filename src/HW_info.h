@@ -12,8 +12,8 @@
 
 #elif defined(AZ_DeliveryDevKitC_V4_BOARD)
 
-  #define FLASH_GPIO_NUM        4       // 
-  #define FLASH_GPIO_NUM        4       // 
+  #define FLASH_GPIO_NUM        2       // 
+  #define LED_BUILTIN           2       // 
 
 #else
 
