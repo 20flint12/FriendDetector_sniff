@@ -98,8 +98,10 @@ const char * wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type) {
 
 void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type) {
   
+
 //  if (type != WIFI_PKT_MGMT)
 //    return;
+
 
   const wifi_promiscuous_pkt_t *ppkt = (wifi_promiscuous_pkt_t *)buff;
   const wifi_ieee80211_packet_t *ipkt = (wifi_ieee80211_packet_t *)ppkt->payload;
@@ -128,6 +130,9 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type) {
 
   if ( !from_DS && to_DS && (mac64_1 == mac64_want) ) {   
 
+    digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+
+
 #ifdef PUBLISH_DEBUG
     Serial.printf("%02x", mac64_2 & 0xFF);
 #endif
@@ -151,9 +156,7 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type) {
   //   Serial.print(*it);
   // }
 
-
-
-  
+ 
 
   // if ( (mac64_1 == mac64_want) || (mac64_2 == mac64_want) || (mac64_3 == mac64_want) || false ) {
   // if ( !from_DS && to_DS && (mac64_1 == mac64_want)  ) {
@@ -209,7 +212,11 @@ void wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type) {
 //    insert_device((uint8_t*)hdr->addr3, (char*)"addr3", 5, false);
 
   }
+
+  digitalWrite(LED_BUILTIN, HIGH);    // turn the LED off by ma
+
 }
+
 
 
 #endif // _MY_SNIFF_32_H    // Put this line at the end of your file.
