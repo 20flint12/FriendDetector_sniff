@@ -54,7 +54,7 @@ bool procPrintSniff(void *);
 
 uint32_t chip_id = 1111111;
 bool init_pass = true;
-bool single_pass = false;
+// bool single_pass = false;
 uint32_t txValue;
 uint16_t CUR_INDEX = 0;
 
@@ -99,7 +99,7 @@ bool procPrintSniff(void *) {       // :  (strList)
   // send2Ble(String(KNOWN_ROUTER)); 
   send2Ble(wanted[KNOWN_ROUTER].friendName); 
 
-  init_pass = true;
+  // init_pass = true;
 
   // check_activity(true, true);        // void check_activity(bool do_print) {            // (strDevs)
   // Serial.println(String(strDevs));
