@@ -25,12 +25,11 @@ Timer<>::Task taskPrintBot;
 
 
 
-#define PERIOD_MainSniff  500                           // 100 ms (!!!) Ð¿ÐµÑÐ¸Ð¾Ð´ Ð¿ÐµÑÐµÐºÐ»ÑÑÐµÐ½Ð¸Ñ ÐºÐ°Ð½Ð°Ð»Ð°
+#define PERIOD_MainSniff  500                           // 500 ms (!!!) Ð¿ÐµÑÐ¸Ð¾Ð´ Ð¿ÐµÑÐµÐºÐ»ÑÑÐµÐ½Ð¸Ñ ÐºÐ°Ð½Ð°Ð»Ð°
+#define PERIOD_PrintSniff 30 * 1000                    // 120 s
 
-#define PERIOD_PrintSniff 100 * 1000                    // 120 s
-
-#define PERIOD_ModeSniff  PERIOD_PrintSniff * 3 + 700   // 3 times + 1 s
-#define PERIOD_ModeBot    PERIOD_PrintBot * 2 + 3000    // 2 times + 1 s
+// #define PERIOD_ModeSniff  PERIOD_PrintSniff * 3 + 700   // 3 times + 1 s
+// #define PERIOD_ModeBot    PERIOD_PrintBot * 2 + 3000    // 2 times + 1 s
 
 
 

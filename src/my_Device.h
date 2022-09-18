@@ -102,6 +102,7 @@ uint8_t KNOWN_ROUTER = 0;
 #define KNOWN_ROUTER_borovsa 16        // router borovsa          @FlintSmart_bot
 #define KNOWN_ROUTER_TP_LINK_344A 17   // router bokei
 #define KNOWN_ROUTER_Roza 18           // router Roza
+#define KNOWN_ROUTER_Roza_1 19         // router Roza 1
 
 
 
@@ -147,13 +148,13 @@ void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂ
       break;
 
 
-    case 0xACFE3BCC:  // #7 ESP32: IoT_home
+    case 0xACFE3BCC:  // #7 ESP32: IoT_home ************************************** Bokei
       BOARD_NAME = BOARD_7;
       strDevs.println(BOARD_NAME);
       BOT_TOKEN = BOT_TOKEN_FriendDetectorBiblyka_bot;
       strDevs.printf_P(PSTR("BOT_TOKEN_FriendDetectorBiblyka_bot\n"));
-      KNOWN_ROUTER = KNOWN_ROUTER_Roza;
-      strDevs.printf_P(PSTR("KNOWN_ROUTER_Roza\n"));
+      KNOWN_ROUTER = KNOWN_ROUTER_TP_LINK_344A;
+      strDevs.printf_P(PSTR("KNOWN_ROUTER_TP_LINK_344A\n"));
       break;
 
     case 0xA9FBBEAC:  // #8 ESP32: second
@@ -165,13 +166,13 @@ void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂ
       strDevs.printf_P(PSTR("KNOWN_ROUTER_Guest_PLINFA\n"));
       break;
 
-    case 0xF2BD9E7C:  // #9   ESP32-CAM: doorbell
+    case 0xF2FFDEFC:  // #9   ESP32-CAM: doorbell 0xF2FFDEFC 0xF2BD9E7C
       BOARD_NAME = BOARD_9;
-      strDevs.println(BOARD_NAME);
+      // strDevs.println(BOARD_NAME);
       BOT_TOKEN = BOT_TOKEN_FlintDebug_bot;
-      strDevs.printf_P(PSTR("BOT_TOKEN_FlintDebug_bot\n"));
-      KNOWN_ROUTER = KNOWN_ROUTER_Richard;
-      strDevs.printf_P(PSTR("KNOWN_ROUTER_Richard\n"));
+      // strDevs.printf_P(PSTR("BOT_TOKEN_FlintDebug_bot\n"));
+      KNOWN_ROUTER = KNOWN_ROUTER_Roza;
+      // strDevs.printf_P(PSTR("KNOWN_ROUTER_Richard\n"));
       break;
 
     case 0x1605613C:  // Ã¢ÂÂ10  ESP32-CAM: last problem
@@ -270,11 +271,11 @@ const WantedDevice wanted[KNOWN_SIZE] = {
   { 0x1a3cf576beb0, "Nosik        ", 30, 11 },  // 14    router Nosik
   { 0x4dcc593247ea, "HiddenSSID   ", 30, 10 },  // 15    router HiddenSSID
   { 0x4dcc593247d8, "borovsa      ", 30, 10 },  // 16    router borovsa
-  { 0x4a34da4a9a90, "TP-LINK_344A ", 30,  8 },  // 17    router TP-LINK_344A
-  { 0x54e43b94e834, "Roza         ", 30,  4 },  // 18    router Roza
+  { 0x4a34da4a9a90, "TP-LINK_344A ", 30,  7 },  // 17    router TP-LINK_344A Bokei
+  { 0x54e43b94e834, "Roza         ", 30, 11 },  // 18    router Roza
   //******************************************************
 
-  { 0xbba1288f8ec4, "DELL-MAX.193 ", 03, 01 },  // 19    client Guest-PLINFA
+  { 0xb8103c94e834, "Roza 1       ", 30,  2 },  // 19    client Roza 1
   { 0xe07058ca8b7c, "TP-LINK_70E0 ", 03, 01 },  // 20    client Guest-PLINFA
   { 0x05a0c81efe86, "Tanja-Iphone ", 02, 01 },  // 21    client Guest-PLINFA
 
@@ -379,7 +380,7 @@ void check_activity(bool add_header, bool add_body) {
                    wanted[KNOWN_ROUTER].friendName.c_str(),
                    wanted[KNOWN_ROUTER].main_channel);
 #ifdef PUBLISH_DEBUG
-    Serial.print(strHead); SerialBT.print(strHead); 
+    Serial.print(strHead); // SerialBT.print(strHead); 
 #endif
   }
 
@@ -432,7 +433,7 @@ void check_activity(bool add_header, bool add_body) {
                      wanted[device[i].index_wanted].friendName.c_str());
 
 #ifdef PUBLISH_DEBUG
-      Serial.print(strTemp); SerialBT.print(strTemp); 
+      Serial.print(strTemp); // SerialBT.print(strTemp); 
      
 #endif
       strTemp += "\n";
@@ -458,7 +459,7 @@ void check_activity(bool add_header, bool add_body) {
     strDevs += strHead;
     strDevs += strBody;
     Serial.printf("\n--------len/cap (%d/%d)\n", strDevs.length(), strDevs.capacity());
-    SerialBT.printf("***\n");
+    // SerialBT.printf("***\n");
     
   }
 }
@@ -467,18 +468,18 @@ void check_activity(bool add_header, bool add_body) {
 
 void reset_activity() {
 
-  // for (itm = mymap.begin(); itm != mymap.end(); ++itm) {
+  for (itm = mymap.begin(); itm != mymap.end(); ++itm) {
 
-  //   uint64_t mac = itm->first;
-  //   int i = itm->second;
+    uint64_t mac = itm->first;
+    int i = itm->second;
 
   //   uint16_t curr_timeout = millis() / 1000 / 60 - device[i].timeMark;      // minutes
   //   uint16_t dev_timeout = wanted[device[i].index_wanted].time_inactivity;  // minutes
 
   //   //if ( curr_timeout > dev_timeout ) {
 
-  //   // reset counter and markers
-  //   device[i].perform = 0;
+    // reset counter and markers
+    device[i].perform = 0;
   //   //}
   //   //else {
 
@@ -486,7 +487,7 @@ void reset_activity() {
 
   //   //device[i].come_in = 0;
   //   //device[i].come_out = 0;
-  // }
+  }
 }
 
 
