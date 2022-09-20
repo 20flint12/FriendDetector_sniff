@@ -272,7 +272,7 @@ const WantedDevice wanted[KNOWN_SIZE] = {
   { 0x4dcc593247ea, "HiddenSSID   ", 30, 10 },  // 15    router HiddenSSID
   { 0x4dcc593247d8, "borovsa      ", 30, 10 },  // 16    router borovsa
   { 0x4a34da4a9a90, "TP-LINK_344A ", 30,  7 },  // 17    router TP-LINK_344A Bokei
-  { 0x54e43b94e834, "Roza",          30,  2 },  // 18    router Roza
+  { 0x54e43b94e834, "Roza",          30,  3 },  // 18    router Roza
   //******************************************************
 
   { 0xb8103c94e834, "Roza 1       ", 30,  2 },  // 19    client Roza 1
