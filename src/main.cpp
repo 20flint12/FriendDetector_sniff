@@ -31,6 +31,9 @@
 
 #include <PString.h>  // https://github.com/boseji/PString-Arduino-lib
 
+String BLE_message = "";
+String BLE_recived = "";
+
 #include "main_BLE_multi.h"
 
 #include "HW_info.h"
@@ -57,7 +60,6 @@ bool single_pass = false;
 uint32_t txValue;
 uint16_t CUR_INDEX = 0;
 
-String BLE_message = "";
 
 
 bool procMainSniff(void *) {        // .
@@ -108,9 +110,11 @@ bool procPrintSniff(void *) {       // :  (strList)
   
   char JSON[20];
   snprintf(JSON, sizeof(JSON), "{\"n\":\"%s\"}", wanted[KNOWN_ROUTER].friendName);
-
   send2Ble(String(JSON)); 
 
+  char JSON2[20];
+  snprintf(JSON, sizeof(JSON), "{\"d\":\"%s\"}", BLE_recived);
+  send2Ble(String(JSON2)); 
 
   // init_pass = true;
 
@@ -233,17 +237,22 @@ void setup() {
   // initialize digital pin LEDs as an output.
   pinMode(FLASH_GPIO_NUM, OUTPUT);
   pinMode(LED_BUILTIN, OUTPUT);
+  
+  for (size_t i = 0; i < 10; i++)
+  {
+    digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(10);                       
+    digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by ma
+    delay(100);                       
+  }
 
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by ma
-  delay(10000);                       
-
-  digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(100);                       
-  digitalWrite(FLASH_GPIO_NUM, LOW);    // turn the LED off by ma
-  delay(100);                       
-
+  for (size_t i = 0; i < 20; i++)
+  {
+    digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(10);                       
+    digitalWrite(FLASH_GPIO_NUM, LOW);    // turn the LED off by ma
+    delay(100);                       
+  }
 
 }
 

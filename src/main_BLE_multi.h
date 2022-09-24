@@ -57,6 +57,18 @@ class MyServerCallbacks: public BLEServerCallbacks {
 };
 
 
+class MyCharacteristicCallbacks: public BLECharacteristicCallbacks {
+        void onWrite(BLECharacteristic *pCharacteristic)
+    {
+      std::string rxValue = pCharacteristic->getValue();
+      Serial.print("value received = ");
+      Serial.println(rxValue.c_str());
+
+      BLE_recived = rxValue.c_str();
+    }
+};
+
+
 void setup_BLE_multi() {
  
   // Create the BLE Device
@@ -75,8 +87,10 @@ void setup_BLE_multi() {
                       BLECharacteristic::PROPERTY_READ |
                       BLECharacteristic::PROPERTY_WRITE |
                       BLECharacteristic::PROPERTY_NOTIFY //|
-                      // BLECharacteristic::PROPERTY_INDICATE
+                    //   BLECharacteristic::PROPERTY_INDICATE
                     );
+
+  pCharacteristic->setCallbacks(new MyCharacteristicCallbacks());
 
   // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.descriptor.gatt.client_characteristic_configuration.xml
   // Create a BLE Descriptor
