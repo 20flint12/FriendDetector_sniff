@@ -9,47 +9,36 @@
 */
 
 
+// #define BLYNK_FIRMWARE_VERSION        "100.2.9"
+
 
 // #define AZ_DeliveryDevKitC_V4_BOARD
 #define AI_Thinker_BOARD
 
 
 
-
-
-// #include <FS.h>
 #include <Arduino.h>
 #include <math.h>
-// #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
-
-// // Wifi Manager
-// #include <WiFiManager.h>         //https://github.com/tzapu/WiFiManager
-// // Setup Wifi connection
-// WiFiManager wifiManager;
-
-// #define BLYNK_FIRMWARE_VERSION        "100.2.9"
-
 #include <PString.h>  // https://github.com/boseji/PString-Arduino-lib
-
-String BLE_message = "";
-String BLE_recived = "";
-
-#include "main_BLE_multi.h"
-
-#include "HW_info.h"
-#include "my_WiFiConn.h"
-#include "my_Device.h"
-#include "my_Sniff_32.h"
-
-
-
 
 
 
 bool procMainSniff(void *);
 bool procPrintSniff(void *);
+bool procBleReceived(void *);
 #include "my_Timers.h"
 
+
+
+String BLE_message = "";
+String BLE_recived = "";
+#include "main_BLE_multi.h"
+
+
+#include "HW_info.h"
+#include "my_WiFiConn.h"
+#include "my_Device.h"
+#include "my_Sniff_32.h"
 #include "my_NTP.h"
 
 
@@ -62,7 +51,7 @@ uint16_t CUR_INDEX = 0;
 
 
 
-bool procMainSniff(void *) {        // .
+bool procMainSniff(void *) {        //
 
   if ( devider++ % 5 == 0 ) {
     Serial.print(".");
@@ -87,7 +76,7 @@ bool procMainSniff(void *) {        // .
 }
 
 
-bool procPrintSniff(void *) {       // :  (strList)
+bool procPrintSniff(void *) {       //
 
   Serial.println(":");
 
@@ -193,6 +182,14 @@ bool procPrintSniff(void *) {       // :  (strList)
 }
 
 
+bool procBleReceived(void *) {       //
+
+  Serial.print("**************");
+
+  return true; // repeat? true
+}
+
+
 void setup() {
 
   Serial.begin(115200);
@@ -232,6 +229,7 @@ void setup() {
 
   taskMainSniff = timerMainSniff.in(1, procMainSniff);
   taskPrintSniff = timerPrintSniff.in(PERIOD_PrintSniff, procPrintSniff);  
+  taskBleReceived = timerBleReceived.in(100, procBleReceived); 
 
 
   // initialize digital pin LEDs as an output.
@@ -246,7 +244,7 @@ void setup() {
     delay(100);                       
   }
 
-  for (size_t i = 0; i < 20; i++)
+  for (size_t i = 0; i < 10; i++)
   {
     digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
     delay(10);                       
@@ -263,5 +261,6 @@ void loop() {
 
   timerMainSniff.tick();
   timerPrintSniff.tick();
- 
+  timerBleReceived.tick();
+
 }
