@@ -29,9 +29,8 @@ bool procBleReceived(void *);
 #include "my_Timers.h"
 
 
-
 String BLE_message = "";
-String BLE_recived = "";
+String str_BLE_received = "";
 #include "main_BLE_multi.h"
 
 
@@ -42,6 +41,7 @@ String BLE_recived = "";
 #include "my_NTP.h"
 
 
+static char JSON[20];
 
 uint32_t chip_id = 1111111;
 // bool init_pass = true;
@@ -55,14 +55,6 @@ bool procMainSniff(void *) {        //
 
   if ( devider++ % 5 == 0 ) {
     Serial.print(".");
-
-    if (deviceConnected) {
-    //     //pTxCharacteristic->setValue(&txValue, 1);
-    //     pTxCharacteristic->setValue((uint8_t*)charTemp, strTemp.length());
-    //     pTxCharacteristic->notify();
-    //     txValue++;
-    }
-    // send2Ble(".");  
   }
 
 
@@ -97,19 +89,11 @@ bool procPrintSniff(void *) {       //
   // serializeJson(obj1, BLE_message);
   // send2Ble(BLE_message); 
   
-  char JSON[20];
+  // char JSON[20];
   snprintf(JSON, sizeof(JSON), "{\"n\":\"%s\"}", wanted[KNOWN_ROUTER].friendName);
   send2Ble(String(JSON)); 
 
-  char JSON2[20];
-  snprintf(JSON, sizeof(JSON), "{\"d\":\"%s\"}", BLE_recived);
-  send2Ble(String(JSON2)); 
-
-  // init_pass = true;
-
-  // check_activity(true, true);        // void check_activity(bool do_print) {            // (strDevs)
-  // Serial.println(String(strDevs));
-
+  
   // loop_BLE_multi();
   if (deviceConnected) {
     digitalWrite(FLASH_GPIO_NUM, HIGH);   // turn the LED on (HIGH is the voltage level)
@@ -184,7 +168,12 @@ bool procPrintSniff(void *) {       //
 
 bool procBleReceived(void *) {       //
 
-  Serial.print("**************");
+  // Serial.print("value received = ");
+  // Serial.println(str_BLE_received);
+
+  // char JSON[20];
+  snprintf(JSON, sizeof(JSON), "{\"d\":\"%s\"}", str_BLE_received);
+  send2Ble(String(JSON)); 
 
   return true; // repeat? true
 }
@@ -229,7 +218,7 @@ void setup() {
 
   taskMainSniff = timerMainSniff.in(1, procMainSniff);
   taskPrintSniff = timerPrintSniff.in(PERIOD_PrintSniff, procPrintSniff);  
-  taskBleReceived = timerBleReceived.in(100, procBleReceived); 
+  //taskBleReceived = timerBleReceived.in(100, procBleReceived); 
 
 
   // initialize digital pin LEDs as an output.

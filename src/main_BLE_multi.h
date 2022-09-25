@@ -37,11 +37,11 @@ uint32_t value = 0;
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
 
-#define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
-#define CHARACTERISTIC_UUID_RX "beb5483e-36e1-4688-b7f5-ea07361b26a8"
+// #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
+// #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
-// #define SERVICE_UUID           "6E400001-B5A3-F393-E0A9-E50E24DCCA9E" // UART service UUID
-// #define CHARACTERISTIC_UUID_RX "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
+#define SERVICE_UUID           "6E400001-B5A3-F393-E0A9-E50E24DCCA9E" // UART service UUID
+#define CHARACTERISTIC_UUID_RX "6E400002-B5A3-F393-E0A9-E50E24DCCA9E"
 #define CHARACTERISTIC_UUID_TX "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
 
 
@@ -63,28 +63,16 @@ class MyServerCallbacks: public BLEServerCallbacks {
 
 class RxCharacteristicCallbacks: public BLECharacteristicCallbacks {
     
-    void onWrite(BLECharacteristic *pRxCharacteristic)
+    void onWrite(BLECharacteristic *pCharacteristic)
     {
-      std::string rxValue = pRxCharacteristic->getValue();
-      Serial.print("value received = ");
-      Serial.println(rxValue.c_str());
-
-      BLE_recived = rxValue.c_str();
+      std::string rxValue = pCharacteristic->getValue();
+      // Serial.print("value received = ");
+      // Serial.println(rxValue.c_str());
+  
+      if (rxValue.length() > 0) 
+        str_BLE_received = rxValue.c_str();
 
       recharge_taskBleReceived();
-
-    //   std::string rxValue = pCharacteristic->getValue();
-
-    //   if (rxValue.length() > 0) {
-    //     Serial.println("*********");
-    //     Serial.print("Received Value: ");
-    //     for (int i = 0; i < rxValue.length(); i++)
-    //       Serial.print(rxValue[i]);
-
-    //     Serial.println();
-    //     Serial.println("*********");
-    //   }
-
     }
 };
 
@@ -92,7 +80,7 @@ class RxCharacteristicCallbacks: public BLECharacteristicCallbacks {
 void setup_BLE_multi() {
  
   // Create the BLE Device
-  BLEDevice::init("ESP44_uart4");
+  BLEDevice::init("ESP49");
 
   // Create the BLE Server
   pServer = BLEDevice::createServer();
@@ -103,29 +91,30 @@ void setup_BLE_multi() {
   // Create the BLE Service
   BLEService *pService = pServer->createService(SERVICE_UUID);
 
-//   // Create a BLE TxCharacteristic
-//   pTxCharacteristic = pService->createCharacteristic(
-//                       CHARACTERISTIC_UUID_TX,
-//                       BLECharacteristic::PROPERTY_READ |
-//                       BLECharacteristic::PROPERTY_WRITE |
-//                       BLECharacteristic::PROPERTY_NOTIFY //|
-//                     //   BLECharacteristic::PROPERTY_INDICATE
-//                     );
-//   pTxCharacteristic->setCallbacks(new MyCharacteristicCallbacks());
+  // // Create a BLE TxCharacteristic
+  // pTxCharacteristic = pService->createCharacteristic(
+  //                     CHARACTERISTIC_UUID_TX,
+  //                     BLECharacteristic::PROPERTY_READ |
+  //                     BLECharacteristic::PROPERTY_WRITE |
+  //                     BLECharacteristic::PROPERTY_NOTIFY //|
+  //                   //   BLECharacteristic::PROPERTY_INDICATE
+  //                   );
+  // pTxCharacteristic->setCallbacks(new RxCharacteristicCallbacks());
 
-  // Create a BLE Characteristic
+
+  // Create a BLE TxCharacteristic
   pTxCharacteristic = pService->createCharacteristic(
-										CHARACTERISTIC_UUID_TX,
-                    BLECharacteristic::PROPERTY_READ |
-                    BLECharacteristic::PROPERTY_WRITE |
-                    BLECharacteristic::PROPERTY_NOTIFY //|
-//                  //   BLECharacteristic::PROPERTY_INDICATE
-									);
+										  CHARACTERISTIC_UUID_TX,
+                      // BLECharacteristic::PROPERTY_READ |
+                      // BLECharacteristic::PROPERTY_WRITE |
+                      BLECharacteristic::PROPERTY_NOTIFY //|
+                      // BLECharacteristic::PROPERTY_INDICATE
+									  );
   pTxCharacteristic->addDescriptor(new BLE2902());
 
   BLECharacteristic * pRxCharacteristic = pService->createCharacteristic(
 											CHARACTERISTIC_UUID_RX,
-											BLECharacteristic::PROPERTY_READ
+											BLECharacteristic::PROPERTY_WRITE
 										);
   pRxCharacteristic->setCallbacks(new RxCharacteristicCallbacks());
 
@@ -136,7 +125,7 @@ void setup_BLE_multi() {
 
   // https://www.bluetooth.com/specifications/gatt/viewer?attributeXmlFile=org.bluetooth.descriptor.gatt.client_characteristic_configuration.xml
   // Create a BLE Descriptor
-//   pTxCharacteristic->addDescriptor(new BLE2902());
+  // pTxCharacteristic->addDescriptor(new BLE2902());
 
   // Start the service
   pService->start();

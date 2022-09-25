@@ -20,10 +20,7 @@ Timer<>::Task taskBleReceived;
 
 #define PERIOD_MainSniff  500                           // 500 ms 
 #define PERIOD_PrintSniff 30 * 1000                     // 30 s
-#define PERIOD_BleReceived 100                          // 100 s
-
-// #define PERIOD_ModeSniff  PERIOD_PrintSniff * 3 + 700   // 3 times + 1 s
-// #define PERIOD_ModeBot    PERIOD_PrintBot * 2 + 3000    // 2 times + 1 s
+#define PERIOD_BleReceived 10                           // 10 ms
 
 
 
@@ -37,14 +34,7 @@ String publishSystemUptime2() {
   return String(ut);
 }
 
-  
-void launch_tasksSniff(void)
-{
-    taskMainSniff = timerMainSniff.in(1, procMainSniff);
-    taskPrintSniff = timerPrintSniff.in(PERIOD_PrintSniff, procPrintSniff);  
-}
-
-
+ 
 void recharge_taskMainSniff(void)
 {
     taskMainSniff = timerMainSniff.in(PERIOD_MainSniff, procMainSniff);
@@ -59,7 +49,7 @@ void recharge_taskPrintSniff(void)
 
 void recharge_taskBleReceived(void)
 {
-    taskBleReceived = timerBleReceived.in(PERIOD_BleReceived, procPrintSniff);
+    taskBleReceived = timerBleReceived.in(PERIOD_BleReceived, procBleReceived);
 }
 
 

@@ -279,11 +279,11 @@ const WantedDevice wanted[KNOWN_SIZE] = {
   { 0xe07058ca8b7c, "TP-LINK_70E0 ", 03, 01 },  // 20    client Guest-PLINFA
   { 0x05a0c81efe86, "Tanja-Iphone ", 02, 01 },  // 21    client Guest-PLINFA
 
-  { 0x4d231134e4c0, "AzureWave Tec", 02, 01 },     // 22    client OOO PLINFA
-  { 0xc09d0fdbf5f4, "Xiaomi Zarhin", 02, 01 },     // 23    client OOO PLINFA
-  { 0x53f8e967ab60, "Xiaomi Maxim?", 02, 01 },     // 24    client OOO PLINFA
-  { 0xf2203c44b32e, "E????thing?  ", 02, 01 },   // 25
-  { 0xd195c5e350cc, "Sasha?       ", 02, 01 },     // 26
+  { 0x4d231134e4c0, "AzureWave Tec", 02, 01 },  // 22    client OOO PLINFA
+  { 0xc09d0fdbf5f4, "Xiaomi Zarhin", 02, 01 },  // 23    client OOO PLINFA
+  { 0x53f8e967ab60, "Xiaomi Maxim?", 02, 01 },  // 24    client OOO PLINFA
+  { 0xf2203c44b32e, "E????thing?  ", 02, 01 },  // 25
+  { 0xd195c5e350cc, "Sasha?       ", 02, 01 },  // 26
 
   { 0x53f8e967ab60, "Xiaomi thing?", 02, 01 },  // 27
   { 0x53f8e967ab60, "Xiaomi thing?", 02, 01 },  // 28
