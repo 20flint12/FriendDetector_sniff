@@ -102,7 +102,7 @@ uint8_t KNOWN_ROUTER = 0;
 #define KNOWN_ROUTER_borovsa 16        // router borovsa          @FlintSmart_bot
 #define KNOWN_ROUTER_TP_LINK_344A 17   // router bokei
 #define KNOWN_ROUTER_Roza 18           // router Roza
-#define KNOWN_ROUTER_Roza_1 19         // router Roza 1
+#define KNOWN_ROUTER_NURSEIT 19        // router Roza 1
 
 
 
@@ -171,7 +171,7 @@ void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂ
       // strDevs.println(BOARD_NAME);
       BOT_TOKEN = BOT_TOKEN_FlintDebug_bot;
       // strDevs.printf_P(PSTR("BOT_TOKEN_FlintDebug_bot\n"));
-      KNOWN_ROUTER = KNOWN_ROUTER_Roza;
+      KNOWN_ROUTER = KNOWN_ROUTER_NURSEIT;
       // strDevs.printf_P(PSTR("KNOWN_ROUTER_Richard\n"));
       break;
 
@@ -275,7 +275,7 @@ const WantedDevice wanted[KNOWN_SIZE] = {
   { 0x54e43b94e834, "Roza",          30,  3 },  // 18    router Roza
   //******************************************************
 
-  { 0xb8103c94e834, "Roza 1       ", 30,  2 },  // 19    client Roza 1
+  { 0xe81fb63b1de0, "Nurseit",       30, 11 },  // 19    client Nurseit
   { 0xe07058ca8b7c, "TP-LINK_70E0 ", 03, 01 },  // 20    client Guest-PLINFA
   { 0x05a0c81efe86, "Tanja-Iphone ", 02, 01 },  // 21    client Guest-PLINFA
 

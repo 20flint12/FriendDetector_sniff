@@ -21,12 +21,14 @@
 //#define WIFI_SSID "POCO Flint"
 //#define WIFI_PASSWORD "88888878"
 
-#define WIFI_SSID "Roza"
-#define WIFI_PASSWORD "87775561177"
+// #define WIFI_SSID "Roza"
+// #define WIFI_PASSWORD "87775561177"
 
 // #define WIFI_SSID "WebHMI_Dryer"
 // #define WIFI_PASSWORD "bokeiDryer"
 
+#define WIFI_SSID "Nurseit"
+#define WIFI_PASSWORD "mirteam2021"
 
 
 void setup_wificonn()

@@ -57,8 +57,6 @@ bool procMainSniff(void *) {        //
     Serial.print(".");
   }
 
-
-  int i = wanted[KNOWN_ROUTER].main_channel;
   wifi_sniffer_set_channel(channel);
   // channel = (channel % WIFI_CHANNEL_MAX) + 1;
   channel = wanted[KNOWN_ROUTER].main_channel;
@@ -174,6 +172,14 @@ bool procBleReceived(void *) {       //
   // char JSON[20];
   snprintf(JSON, sizeof(JSON), "{\"d\":\"%s\"}", str_BLE_received);
   send2Ble(String(JSON)); 
+
+
+  // Set param (channel, ...)
+  if (str_BLE_received.startsWith("c ")) {  // if the received message starts with "c "...
+
+      const char *buf = str_BLE_received.c_str();
+      uint8_t n = sscanf(buf, "c %d", &channel);
+  }
 
   return true; // repeat? true
 }
