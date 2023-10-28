@@ -27,8 +27,14 @@
 // #define WIFI_SSID "WebHMI_Dryer"
 // #define WIFI_PASSWORD "bokeiDryer"
 
-#define WIFI_SSID "Nurseit"
-#define WIFI_PASSWORD "mirteam2021"
+// #define WIFI_SSID "Nurseit"
+// #define WIFI_PASSWORD "mirteam2021"
+
+// #define WIFI_SSID "mazuria-gosc"
+// #define WIFI_PASSWORD "hotelmazuria"
+
+#define WIFI_SSID "2.4G-Vectra-WiFi-852C3A"
+#define WIFI_PASSWORD "oglqtbnzm32ydjmx"
 
 
 void setup_wificonn()

@@ -80,7 +80,15 @@ class RxCharacteristicCallbacks: public BLECharacteristicCallbacks {
 void setup_BLE_multi() {
  
   // Create the BLE Device
-  BLEDevice::init("ESP49");
+#if defined(AZ_DeliveryDevKitC_V4_BOARD)
+  BLEDevice::init("DEV88");
+#elif defined(AI_Thinker_BOARD)
+  BLEDevice::init("CAM88");
+#endif
+
+
+
+  BLEDevice::init("ESP88");
 
   // Create the BLE Server
   pServer = BLEDevice::createServer();

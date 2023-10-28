@@ -9,6 +9,7 @@
 */
 
 
+
 // #define BLYNK_FIRMWARE_VERSION        "100.2.9"
 
 
@@ -18,6 +19,11 @@
 
 
 #include <Arduino.h>
+
+#include "my_Settings.h"
+#include "my_Eeprom.h"
+
+
 #include <math.h>
 #include <PString.h>  // https://github.com/boseji/PString-Arduino-lib
 
@@ -59,7 +65,7 @@ bool procMainSniff(void *) {        //
 
   wifi_sniffer_set_channel(channel);
   // channel = (channel % WIFI_CHANNEL_MAX) + 1;
-  channel = wanted[KNOWN_ROUTER].main_channel;
+  // channel = wanted[KNOWN_ROUTER].main_channel;
 
   recharge_taskMainSniff();
   return true; // repeat? true
@@ -179,6 +185,17 @@ bool procBleReceived(void *) {       //
 
       const char *buf = str_BLE_received.c_str();
       uint8_t n = sscanf(buf, "c %d", &channel);
+
+      configStore.channel_sniff = channel;
+      BLYNK_LOG2("channel_sniff: ", configStore.channel_sniff);
+      config_save();
+
+  } else if (str_BLE_received == "c") {
+    send2Ble(String(channel)); 
+  
+  } else if (str_BLE_received == "r") {
+    send2Ble(String("reboting...")); 
+    ESP.restart();
   }
 
   return true; // repeat? true
@@ -192,7 +209,11 @@ void setup() {
   while (!Serial);
   delay (1000);
 
+
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  config_init();
+  channel = configStore.channel_sniff;
+  BLYNK_LOG2("channel_sniff: ", channel);
 
 
   chip_id = print_hw_info(String(__FILE__), true);

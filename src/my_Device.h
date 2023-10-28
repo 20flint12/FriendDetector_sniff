@@ -64,6 +64,7 @@ static const char BOARD_8[] = "#8 ESP32: second";
 static const char BOARD_9[] = "#9 ESP32-CAM: doorbell";
 static const char BOARD_10[] = "#10 ESP32-CAM: last problem";
 static const char BOARD_11[] = "#11 ESP32-CAM: third";
+static const char BOARD_12[] = "#12 ESP32-WROVER";
 
 
 
@@ -103,6 +104,10 @@ uint8_t KNOWN_ROUTER = 0;
 #define KNOWN_ROUTER_TP_LINK_344A 17   // router bokei
 #define KNOWN_ROUTER_Roza 18           // router Roza
 #define KNOWN_ROUTER_NURSEIT 19        // router Roza 1
+
+#define KNOWN_ROUTER_MAZURIA    20     // router_MAZURIA
+#define KNOWN_ROUTER_MALECKIEGO8  21   // router_MALECKIEGO8
+#define KNOWN_ROUTER_MAZURIA_3  23     // router_MAZURIA_3
 
 
 
@@ -147,14 +152,13 @@ void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂ
       strDevs.printf_P(PSTR("KNOWN_ROUTER_TP_LINK_F186\n"));
       break;
 
-
     case 0xACFE3BCC:  // #7 ESP32: IoT_home ************************************** Bokei
       BOARD_NAME = BOARD_7;
       strDevs.println(BOARD_NAME);
       BOT_TOKEN = BOT_TOKEN_FriendDetectorBiblyka_bot;
       strDevs.printf_P(PSTR("BOT_TOKEN_FriendDetectorBiblyka_bot\n"));
-      KNOWN_ROUTER = KNOWN_ROUTER_Roza;
-      strDevs.printf_P(PSTR("KNOWN_ROUTER_Roza\n"));
+      KNOWN_ROUTER = KNOWN_ROUTER_MAZURIA;
+      strDevs.printf_P(PSTR("KNOWN_ROUTER_MAZURIA\n"));
       break;
 
     case 0xA9FBBEAC:  // #8 ESP32: second
@@ -166,12 +170,12 @@ void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂ
       strDevs.printf_P(PSTR("KNOWN_ROUTER_Guest_PLINFA\n"));
       break;
 
-    case 0xF2FFDEFC:  // #9   ESP32-CAM: doorbell 0xF2FFDEFC 0xF2BD9E7C
+    case 0xF2FFDEFC:  // #9   ESP32-CAM: doorbell ***************** 0xF2FFDEFC 0xF2BD9E7C
       BOARD_NAME = BOARD_9;
       // strDevs.println(BOARD_NAME);
       BOT_TOKEN = BOT_TOKEN_FlintDebug_bot;
       // strDevs.printf_P(PSTR("BOT_TOKEN_FlintDebug_bot\n"));
-      KNOWN_ROUTER = KNOWN_ROUTER_NURSEIT;
+      KNOWN_ROUTER = KNOWN_ROUTER_MAZURIA;
       // strDevs.printf_P(PSTR("KNOWN_ROUTER_Richard\n"));
       break;
 
@@ -193,12 +197,13 @@ void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂ
       strDevs.printf_P(PSTR("KNOWN_ROUTER_Nosik\n"));
       break;
 
-
-
     default:
+      BOARD_NAME = BOARD_12;
       strDevs.println(BOARD_NAME);
       BOT_TOKEN = BOT_TOKEN_InspectorBiblyka_bot;
       strDevs.printf_P(PSTR("InspectorBiblyka_bot !!!!!!!!!!!!WRONG CONFIG!!!!!!!!\n"));
+      KNOWN_ROUTER = KNOWN_ROUTER_MALECKIEGO8;
+      strDevs.printf_P(PSTR("KNOWN_ROUTER_MALECKIEGO8\n"));
   }
 }
 
@@ -276,10 +281,11 @@ const WantedDevice wanted[KNOWN_SIZE] = {
   //******************************************************
 
   { 0xe81fb63b1de0, "Nurseit",       30, 11 },  // 19    client Nurseit
-  { 0xe07058ca8b7c, "TP-LINK_70E0 ", 03, 01 },  // 20    client Guest-PLINFA
-  { 0x05a0c81efe86, "Tanja-Iphone ", 02, 01 },  // 21    client Guest-PLINFA
+  { 0xb7cec19ad76e, "mazuria-gos", 03, 01 },  // 20    KNOWN_ROUTER_MAZURIA
+  // { 0x1f2be33ca436, "mazuria-gos", 03, 01 },  // 20    KNOWN_ROUTER_MAZURIA
+  { 0x3f2c8514c1f4, "maleckiego8", 02, 01 },  // 21    KNOWN_ROUTER_MALECKIEGO8
+  { 0x4d231134e4c0, "mazuria-go3", 02, 01 },  // 22    KNOWN_ROUTER_MAZURIA_3
 
-  { 0x4d231134e4c0, "AzureWave Tec", 02, 01 },  // 22    client OOO PLINFA
   { 0xc09d0fdbf5f4, "Xiaomi Zarhin", 02, 01 },  // 23    client OOO PLINFA
   { 0x53f8e967ab60, "Xiaomi Maxim?", 02, 01 },  // 24    client OOO PLINFA
   { 0xf2203c44b32e, "E????thing?  ", 02, 01 },  // 25
