@@ -83,7 +83,7 @@ void setup_BLE_multi() {
 #if defined(AZ_DeliveryDevKitC_V4_BOARD)
   BLEDevice::init("DEV88");
 #elif defined(AI_Thinker_BOARD)
-  BLEDevice::init("CAM88");
+  BLEDevice::init("Wrover-sniff");
 #endif
 
 

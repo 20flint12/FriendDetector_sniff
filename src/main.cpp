@@ -76,6 +76,7 @@ bool procPrintSniff(void *) {       //
 
   Serial.println(":");
 
+  // *********************************
   // send2Ble(":"); 
   // send2Ble(String(txValue)); 
   // send2Ble(String(__FILE__)); 
@@ -92,10 +93,13 @@ bool procPrintSniff(void *) {       //
   // BLE_message = "";
   // serializeJson(obj1, BLE_message);
   // send2Ble(BLE_message); 
-  
-  // char JSON[20];
-  snprintf(JSON, sizeof(JSON), "{\"n\":\"%s\"}", wanted[KNOWN_ROUTER].friendName);
-  send2Ble(String(JSON)); 
+  // *********************************
+
+
+
+  // // char JSON[20];
+  // snprintf(JSON, sizeof(JSON), "{\"n\":\"%s\"}", wanted[KNOWN_ROUTER].friendName);
+  // send2Ble(String(JSON)); 
 
   
   // loop_BLE_multi();
@@ -126,6 +130,7 @@ bool procPrintSniff(void *) {       //
 
       switch (i)
       {
+      // case 0: doc[printMac64s(mac)] = perform; break;
       case 0: doc["p0"] = perform; break;
       case 1: doc["p1"] = perform; break;
       case 2: doc["p2"] = perform; break;
@@ -140,13 +145,15 @@ bool procPrintSniff(void *) {       //
       default: doc["pX"] = perform; break;
       }
 
-      doc["n"] = 8;
+      // doc["n"] = 8;
 
       JsonObject obj = doc.as<JsonObject>();
       BLE_message = "";
       serializeJson(obj, BLE_message);
 
       send2Ble(BLE_message);  
+      
+      // break;  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
   }
   // disconnecting

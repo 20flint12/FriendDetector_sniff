@@ -111,7 +111,7 @@ uint8_t KNOWN_ROUTER = 0;
 
 
 
-void setup_config(uint32_t chip_id) {  // ÃÂ²ÃÂºÃÂ»ÃÂÃÂÃÂµÃÂ½ÃÂ¸ÃÂµ ÃÂºÃÂ¾ÃÂ½ÃÂÃÂ¸ÃÂ³ÃÂÃÂÃÂ°ÃÂÃÂ¸ÃÂ¸ ÃÂ² ÃÂ·ÃÂ°ÃÂ²ÃÂ¸ÃÂÃÂ¸ÃÂ¼ÃÂ¾ÃÂÃÂÃÂ¸ ÃÂ¾ÃÂ ÃÂ¼ÃÂ¾ÃÂ´ÃÂÃÂ»ÃÂ
+void setup_config(uint32_t chip_id) {  //
 
   strDevs.printf_P(PSTR("\n=== Gonfiguration ===\n"));
 
@@ -283,7 +283,7 @@ const WantedDevice wanted[KNOWN_SIZE] = {
   { 0xe81fb63b1de0, "Nurseit",       30, 11 },  // 19    client Nurseit
   { 0xb7cec19ad76e, "mazuria-gos", 03, 01 },  // 20    KNOWN_ROUTER_MAZURIA
   // { 0x1f2be33ca436, "mazuria-gos", 03, 01 },  // 20    KNOWN_ROUTER_MAZURIA
-  { 0x3f2c8514c1f4, "maleckiego8", 02, 01 },  // 21    KNOWN_ROUTER_MALECKIEGO8
+  { 0x3f2c8514c1f4, "maleckiego8", 02, 11 },  // 21    KNOWN_ROUTER_MALECKIEGO8
   { 0x4d231134e4c0, "mazuria-go3", 02, 01 },  // 22    KNOWN_ROUTER_MAZURIA_3
 
   { 0xc09d0fdbf5f4, "Xiaomi Zarhin", 02, 01 },  // 23    client OOO PLINFA
